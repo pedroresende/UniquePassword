@@ -1,0 +1,17 @@
+{
+  "name": "test",
+  "authors": [
+    "Pedro Resende <pedroresende@mail.resende.biz>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "react": "^0.14.7",
+    "bootstrap": "^3.3.6",
+    "gulp": "^3.9.0",
+    "jquery": "^2.2.0"
+  }
+}
