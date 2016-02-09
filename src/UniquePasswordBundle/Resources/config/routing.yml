@@ -1,3 +1,11 @@
-unique_password_homepage:
+unique_password_dashboard:
     path:     /
-    defaults: { _controller: UniquePasswordBundle:Default:index }
+    defaults: { _controller: UniquePasswordBundle:Dashboard:index }
+
+unique_password_add:
+    path:     /add
+    defaults: { _controller: UniquePasswordBundle:Password:add }
+
+unique_password_retrieve:
+    path:     /retrieve
+    defaults: { _controller: UniquePasswordBundle:Password:retrieve }
