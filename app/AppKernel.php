@@ -17,6 +17,10 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new UniquePasswordBundle\UniquePasswordBundle(),
+            new Avanzu\AdminThemeBundle\AvanzuAdminThemeBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new OverrideFOSUserBundle\OverrideFOSUserBundle(),
+            new OverrideAdminThemeBundle\OverrideAdminThemeBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

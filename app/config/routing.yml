@@ -1,3 +1,11 @@
+override_admin_theme:
+    resource: "@OverrideAdminThemeBundle/Resources/config/routing.yml"
+    prefix:   /
+
+override_fos_user:
+    resource: "@OverrideFOSUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 unique_password:
     resource: "@UniquePasswordBundle/Resources/config/routing.yml"
     prefix:   /
