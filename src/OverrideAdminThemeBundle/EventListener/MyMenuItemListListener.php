@@ -7,7 +7,6 @@ use Avanzu\AdminThemeBundle\Event\SidebarMenuEvent;
 use Avanzu\AdminThemeBundle\Model\MenuItemModel;
 use Symfony\Component\HttpFoundation\Request;
 
-
 /**
  * Description of MyMenuItemListListener
  *
@@ -30,11 +29,16 @@ class MyMenuItemListListener
         $earg = array();
         $rootItems = array(
             $dash = new MenuItemModel('dashboard', 'Dashboard', 'unique_password_dashboard', $earg, 'fa fa-dashboard'),
-            $pass = new MenuItemModel('password', 'Password', '', $earg, 'fa fa-key'),
+            $password = new MenuItemModel('password', 'Password', '', $earg, 'fa fa-key'),
+            $categories = new MenuItemModel('categories', 'Categories', '', $earg, 'fa fa-folder-open-o'),
         );
 
-        $pass->addChild(new MenuItemModel('add-passwords', 'Add New', 'unique_password_add', $earg, 'fa fa-plus'))
-                ->addChild($icons = new MenuItemModel('get-passwords', 'Retrieve', 'unique_password_retrieve', $earg, 'fa fa-unlock'));
+        $password
+                ->addChild(new MenuItemModel('add-passwords', 'Add New', 'unique_password_add', $earg, 'fa fa-plus'))
+                ->addChild(new MenuItemModel('list-passwords', 'Retrieve', 'unique_password_list', $earg, 'fa fa-unlock'));
+
+        $categories
+                ->addChild(new MenuItemModel('list-categories', 'List Categories', 'unique_categories_list', $earg, 'fa fa-folder-open-o'));
 
         return $this->activateByRoute($request->get('_route'), $rootItems);
     }
