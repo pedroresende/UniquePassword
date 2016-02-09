@@ -1,0 +1,4 @@
+services:
+#    override_fos_user.example:
+#        class: OverrideFOSUserBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

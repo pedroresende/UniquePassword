@@ -1,0 +1,22 @@
+{% extends "OverrideFOSUserBundle:template:base.html.twig" %}
+
+{% block title %}Welcome to Unique Password{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{asset('css/login.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    {% for type, messages in app.session.flashBag.all %}
+        {% for message in messages %}
+            <div class="{{ type }}">
+                {{ message|trans({}, 'FOSUserBundle') }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+{% endblock %}
