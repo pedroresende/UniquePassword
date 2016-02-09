@@ -1,0 +1,15 @@
+parameters:
+    overrideadminbundle.show_user_listener.class: OverrideAdminThemeBundle\EventListener\MyShowUserListener
+    overrideadminbundle.menu_listener.class: OverrideAdminThemeBundle\EventListener\MyMenuItemListListener
+
+services:
+    overrideadminbundle.show_user_listener:
+        class: %overrideadminbundle.show_user_listener.class%
+        tags:
+            - { name: kernel.event_listener, event: theme.navbar_user, method: onShowUser }
+            - { name: kernel.event_listener, event: theme.sidebar_user, method: onShowUser }
+    
+    overrideadminbundle.menu_listener:
+        class: %overrideadminbundle.menu_listener.class%
+        tags:
+            - { name: kernel.event_listener, event: theme.sidebar_setup_menu, method: onSetupMenu }
