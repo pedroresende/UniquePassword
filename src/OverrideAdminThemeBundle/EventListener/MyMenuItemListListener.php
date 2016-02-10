@@ -27,7 +27,7 @@ class MyMenuItemListListener
     {
         $earg = array();
         $rootItems = array(
-            $dash = new MenuItemModel('dashboard', 'Dashboard', 'unique_password_dashboard', $earg, 'fa fa-dashboard'),
+            new MenuItemModel('dashboard', 'Dashboard', 'unique_password_dashboard', $earg, 'fa fa-dashboard'),
             $password = new MenuItemModel('password', 'Password', '', $earg, 'fa fa-key'),
             $categories = new MenuItemModel('categories', 'Categories', '', $earg, 'fa fa-folder-open-o'),
         );
