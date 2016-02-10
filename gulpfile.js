@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var less = require('gulp-less');
 var uglify = require("gulp-uglify");
 var path = require('path');
-var minifyCSS = require('gulp-minify-css');
+var cssnano = require('gulp-cssnano');
 var rename = require("gulp-rename");
 var image = require('gulp-image');
 var react = require('gulp-react');
@@ -24,7 +24,7 @@ gulp.task('minify-js', function () {
 gulp.task('minifylesstocss', function () {
     gulp.src('./src/**/**/Resources/public/less/*.less')
             .pipe(less())
-            .pipe(minifyCSS())
+            .pipe(cssnano())
             .pipe(rename({dirname: ''}))
             .pipe(gulp.dest('web/css'));
 });
