@@ -21,4 +21,5 @@ php -r "readfile('https://getcomposer.org/installer');" | php
 $ bower install
 $ npm install
 $ php composer.phar install
+$ php bin/console doctrine:migrations:migrate
 ```
