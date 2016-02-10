@@ -3,9 +3,17 @@ unique_password_dashboard:
     defaults: { _controller: UniquePasswordBundle:Dashboard:index }
 
 unique_password_add:
-    path:     /add
+    path:     /password/add
     defaults: { _controller: UniquePasswordBundle:Password:add }
 
-unique_password_retrieve:
-    path:     /retrieve
-    defaults: { _controller: UniquePasswordBundle:Password:retrieve }
+unique_password_list:
+    path:     /password
+    defaults: { _controller: UniquePasswordBundle:Password:list }
+
+unique_categories_list:
+    path:     /categories
+    defaults: { _controller: UniquePasswordBundle:Category:list }
+    
+unique_categories_getlist:
+    path:     /categories/get
+    defaults: { _controller: UniquePasswordBundle:Category:getList }
