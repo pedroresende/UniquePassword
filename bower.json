@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "Unique Password",
   "authors": [
     "Pedro Resende <pedroresende@mail.resende.biz>"
   ],
@@ -7,11 +7,12 @@
   "main": "",
   "moduleType": [],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "http://www.pedro.resende.biz",
   "dependencies": {
     "react": "^0.14.7",
     "bootstrap": "^3.3.6",
     "gulp": "^3.9.0",
-    "jquery": "^2.2.0"
+    "jquery": "^2.2.0",
+    "babel": "*"
   }
 }
