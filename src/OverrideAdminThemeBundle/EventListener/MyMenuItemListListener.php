@@ -3,7 +3,6 @@
 namespace OverrideAdminThemeBundle\EventListener;
 
 use Avanzu\AdminThemeBundle\Event\SidebarMenuEvent;
-#use OverrideAdminThemeBundle\Model\MenuItemModel;
 use Avanzu\AdminThemeBundle\Model\MenuItemModel;
 use Symfony\Component\HttpFoundation\Request;
 
