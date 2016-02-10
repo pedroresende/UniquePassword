@@ -5,6 +5,14 @@ var path = require('path');
 var minifyCSS = require('gulp-minify-css');
 var rename = require("gulp-rename");
 var image = require('gulp-image');
+var react = require('gulp-react');
+
+gulp.task('copy-react-js', function() {
+    gulp.src('./src/**/**/Resources/public/js-react/*.js')
+        .pipe(react())
+        .pipe(rename({dirname: ''}))
+        .pipe(gulp.dest('web/js'));
+});
 
 gulp.task('minify-js', function () {
     gulp.src('./src/**/**/Resources/public/js/*.js') // path to your files
@@ -28,12 +36,16 @@ gulp.task('image', function () {
     .pipe(gulp.dest('web/img'));
 });
 
-gulp.task('default', ['minifylesstocss', 'minify-js', 'image'], function () {
+gulp.task('default', ['minifylesstocss', 'minify-js', 'copy-react-js', 'image'], function () {
     console.log("Started gulp");
 });
 
 gulp.watch('./src/**/**/Resources/public/less/*.less', ['minifylesstocss'], function () {
     console.log("Compressing less");
+});
+
+gulp.watch('./src/**/**/Resources/public/js-react/*.js', ['copy-react-js'], function () {
+    console.log("Copying react.js");
 });
 
 gulp.watch('./src/**/**/Resources/public/js/*.js', ['minify-js'], function () {
