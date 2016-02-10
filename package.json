@@ -1,0 +1,32 @@
+{
+  "name": "UniquePassword",
+  "version": "1.0.0",
+  "description": "Unique Password NPM",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pedroresende/UniquePassword.git"
+  },
+  "keywords": [
+    "password",
+    "npm",
+    "gulp",
+    "bower",
+    "symfony",
+    "react.js"
+  ],
+  "author": "Pedro Resende",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pedroresende/UniquePassword/issues"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-cssnano": "^2.1.0",
+    "gulp-image": "^1.3.1",
+    "gulp-less": "^3.0.5",
+    "gulp-react": "^3.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.2",
+    "path": "^0.12.7"
+  }
+}
