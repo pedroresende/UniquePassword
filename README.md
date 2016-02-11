@@ -22,4 +22,5 @@ $ bower install
 $ npm install
 $ php composer.phar install
 $ php bin/console doctrine:migrations:migrate
+$ gulp
 ```
