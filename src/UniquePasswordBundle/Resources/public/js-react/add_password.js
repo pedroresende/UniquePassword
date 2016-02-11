@@ -144,6 +144,6 @@ var CategoryContent = React.createClass({
 });
       
 ReactDOM.render(
-  <CategoryContent url="http://localhost:8000/categories/get"/>,
+  <CategoryContent url="/categories/get"/>,
   document.getElementById('add_password')
 );
