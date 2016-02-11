@@ -1,7 +1,7 @@
 #Unique Password
 
-Unique Password is a password manager system base on Symfony 3.0 that will allow you
-to store your passwords on a secure environment
+Unique Password is a password manager system based on Symfony 3.0 that will allow you
+to store your passwords on a secure environment.
 
 ##Start
 
