@@ -102,6 +102,22 @@ var CreditCardForm = React.createClass ({
     }
 });
 
+var NoteForm = React.createClass ({
+    componentDidMount: function() {
+        $('.note').wysihtml5();
+    },
+    render: function() {
+        return (
+            <div>
+                <div className="form-group">
+                    <label htmlFor="noteInput">Note</label>
+                    <textarea rows="8" cols="50" className="form-control note" id="noteInput" ref="noteInput" placeholder="Note" ></textarea>
+                </div>
+            </div>
+        );
+    }
+});
+
 var CategoryList = React.createClass({
   render: function() {
     return (
@@ -148,7 +164,7 @@ var CategoryContent = React.createClass({
             if (this.state.contentState == 2) {
                 content = <CreditCardForm/>;
             } else {
-                content = <NotesForm/>;
+                content = <NoteForm/>;
             } 
         }
         return (
