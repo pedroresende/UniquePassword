@@ -32,6 +32,32 @@ var Years = React.createClass({
     }
 });
 
+var Month = React.createClass({
+   render: function () {
+       return (
+        <option value={this.props.data}>
+            {this.props.data}
+        </option>
+        )
+   } 
+});
+
+var Months = React.createClass({
+    render: function () {
+        var months = [];
+        for (var i=1; i <= 12; i++) {
+            months.push(<Month key={i} data={i}/>);
+        }
+        return (
+            <div className="month">
+                <select id="month">
+                    {months}
+                </select>
+            </div>
+        )
+    }
+});
+
 var LoginForm = React.createClass ({
     render: function() {
         return (
@@ -67,8 +93,9 @@ var CreditCardForm = React.createClass ({
                 </div>
                 <div className="form-group">
                     <label htmlFor="dateInput">End Date</label>
-                    <Years/>
-                    <input type="date" className="form-control" id="dateMonthInput" ref="date" placeholder="Month" />
+                    <div className="containerDate">
+                    <Months/><Years/>
+                    </div>
                 </div>
             </div>
         );
