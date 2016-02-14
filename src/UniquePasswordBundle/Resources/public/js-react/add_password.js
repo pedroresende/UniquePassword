@@ -24,7 +24,7 @@ var Years = React.createClass({
         }
         return (
             <div>
-                <select id="year" ref="creditcard-year">
+                <select id="year" name="creditcard-year" ref="creditcard-year">
                     {years}
                 </select>
             </div>
@@ -50,7 +50,7 @@ var Months = React.createClass({
         }
         return (
             <div className="month">
-                <select id="month" ref="creditcard-month">
+                <select id="month" name="creditcard-month" ref="creditcard-month">
                     {months}
                 </select>
             </div>
@@ -64,15 +64,15 @@ var LoginForm = React.createClass ({
             <div>
                 <div className="form-group">
                     <label htmlFor="usernameInput">Username</label>
-                    <input type="text" className="form-control" id="usernameInput" ref="site-username" placeholder="Username" />
+                    <input type="text" className="form-control" id="usernameInput" name="site-username" ref="site-username" placeholder="Username" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="passwordInput">Password</label>
-                    <input type="text" className="form-control" id="passwordInput" ref="site-password" placeholder="Password" />
+                    <input type="password" className="form-control" id="passwordInput" name="site-password" ref="site-password" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="sitenameInput">Site Name</label>
-                    <input type="text" className="form-control" id="sitenameInput" ref="site-sitename" placeholder="http://..." />
+                    <input type="text" className="form-control" id="sitenameInput" name="site-sitename" ref="site-sitename" placeholder="http://..." />
                 </div>
             </div>
         );
@@ -85,11 +85,11 @@ var CreditCardForm = React.createClass ({
             <div>
                 <div className="form-group">
                     <label htmlFor="usernameInput">Name</label>
-                    <input type="text" className="form-control" id="usernameInput" ref="creditcard-name" placeholder="Name" />
+                    <input type="text" className="form-control" id="usernameInput" name="creditcard-name" ref="creditcard-name" placeholder="Name" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="numberInput">Credit Card Number</label>
-                    <input type="text" className="form-control" id="numberInput" ref="creditcard-number" placeholder="Credit Card Number" />
+                    <input type="text" className="form-control" id="numberInput" name="creditcard-number" ref="creditcard-number" placeholder="Credit Card Number" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="dateInput">End Date</label>
@@ -148,22 +148,6 @@ var CategoryContent = React.createClass({
             }.bind(this)
         });
     },
-    handleSubmit: function(e) {
-        e.preventDefault();
-        var name = this.refs.name.value.trim();
-        var category = this.refs.category.value.trim();
-        //var note = this.refs.note.value.trim();
-        console.log(name);
-//        var password = this.refs.password.value.trim();
-//        var file = this.refs.file.value.trim();
-//        var checkbox = this.refs.checkbox.value.trim();
-//        if (!email || !password) {
-//            return;
-//        }
-//        console.log("Email " + email + " Password " + password);
-//        this.refs.email.value = '';
-//        this.refs.password.value = '';
-    },
     handleChange: function(event) {
         this.setState({contentState: event.target.value});
     },
@@ -184,14 +168,14 @@ var CategoryContent = React.createClass({
             } 
         }
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form method="POST" action="/password/add">
                 <div className="form-group">
                     <label htmlFor="nameInput">Name</label>
-                    <input type="text" className="form-control" id="nameInput" ref="name" placeholder="Name" />
+                    <input type="text" className="form-control" id="nameInput" ref="name" name="name" placeholder="Name" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleInputPassword1">Category</label>
-                    <select className="form-control" onChange={this.handleChange} ref="category">
+                    <select className="form-control" onChange={this.handleChange} name="categoy" ref="category">
                         {categories}
                     </select>
                 </div>
