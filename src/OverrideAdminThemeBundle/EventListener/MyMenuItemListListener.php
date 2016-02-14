@@ -37,7 +37,7 @@ class MyMenuItemListListener
                 ->addChild(new MenuItemModel('list-passwords', 'Retrieve', 'unique_password_list', $earg, 'fa fa-unlock'));
 
         $categories
-                ->addChild(new MenuItemModel('list-categories', 'List Categories', 'unique_categories_list', $earg, 'fa fa-folder-open-o'));
+                ->addChild(new MenuItemModel('list-categories', 'List', 'unique_categories_list', $earg, 'fa fa-folder-open-o'));
 
         return $this->activateByRoute($request->get('_route'), $rootItems);
     }
