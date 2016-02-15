@@ -24,7 +24,7 @@ var Years = React.createClass({
         }
         return (
             <div>
-                <select id="year" name="creditcard-year" ref="creditcard-year">
+                <select id="year" name="creditcardYear" ref="creditcardYear">
                     {years}
                 </select>
             </div>
@@ -50,7 +50,7 @@ var Months = React.createClass({
         }
         return (
             <div className="month">
-                <select id="month" name="creditcard-month" ref="creditcard-month">
+                <select id="month" name="creditcardMonth" ref="creditcardMonth">
                     {months}
                 </select>
             </div>
@@ -64,15 +64,15 @@ var LoginForm = React.createClass ({
             <div>
                 <div className="form-group">
                     <label htmlFor="usernameInput">Username</label>
-                    <input type="text" className="form-control" id="usernameInput" name="site-username" ref="site-username" placeholder="Username" />
+                    <input type="text" className="form-control" id="usernameInput" name="siteUsername" ref="siteUsername" placeholder="Username" required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="passwordInput">Password</label>
-                    <input type="password" className="form-control" id="passwordInput" name="site-password" ref="site-password" />
+                    <input type="password" className="form-control" id="passwordInput" name="sitePassword" ref="sitePassword" required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="sitenameInput">Site Name</label>
-                    <input type="text" className="form-control" id="sitenameInput" name="site-sitename" ref="site-sitename" placeholder="http://..." />
+                    <input type="text" className="form-control" id="sitenameInput" name="siteSitename" ref="siteSitename" placeholder="http://..." required/>
                 </div>
             </div>
         );
@@ -85,11 +85,11 @@ var CreditCardForm = React.createClass ({
             <div>
                 <div className="form-group">
                     <label htmlFor="usernameInput">Name</label>
-                    <input type="text" className="form-control" id="usernameInput" name="creditcard-name" ref="creditcard-name" placeholder="Name" />
+                    <input type="text" className="form-control" id="usernameInput" name="creditcardName" ref="creditcardName" placeholder="Name" required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="numberInput">Credit Card Number</label>
-                    <input type="text" className="form-control" id="numberInput" name="creditcard-number" ref="creditcard-number" placeholder="Credit Card Number" />
+                    <input type="text" className="form-control" id="numberInput" name="creditcardNumber" ref="creditcardNumber" placeholder="Credit Card Number" required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="dateInput">End Date</label>
@@ -110,8 +110,8 @@ var NoteForm = React.createClass ({
         return (
             <div>
                 <div className="form-group">
-                    <label htmlFor="note">Note</label>
-                    <textarea rows="8" cols="50" className="form-control note" id="noteInput" ref="note" placeholder="Note" ></textarea>
+                    <label htmlFor="noteNote">Note</label>
+                    <textarea rows="8" cols="50" className="form-control note" id="noteInput" ref="noteNote" name="noteNote" placeholder="Note" required></textarea>
                 </div>
             </div>
         );
@@ -151,6 +151,39 @@ var CategoryContent = React.createClass({
     handleChange: function(event) {
         this.setState({contentState: event.target.value});
     },
+    handleSubmit: function(e) {
+        e.preventDefault();
+        var name = this.refs.name.value.trim();
+        var category = this.refs.category.value.trim();
+        if (category == 1) {
+            var siteUsername = this.refs.loginform.refs.siteUsername.value;
+            var sitePasword = this.refs.loginform.refs.sitePassword.value;
+            var siteSitename = this.refs.loginform.refs.siteSitename.value;
+            var senddata = {'name': name,'category': category, 'siteUsername': siteUsername, 'sitePasword': sitePasword, 'siteSitename': siteSitename};
+        } else {
+            if (category == 2) {                
+                var creditcardName = this.refs.creditcardform.refs.creditcardName.value;
+                var creditcardNumber = this.refs.creditcardform.refs.creditcardNumber.value;
+                var creditcardMonth = this.refs.creditcardform.refs.creditcardMonth.value;
+                var creditcardYear = this.refs.creditcardform.refs.creditcardYear.value;
+                var senddata = {'name': name,'category': category, 'creditcardName': creditcardName, 'creditcardNumber': creditcardNumber, 'creditcardMonth': creditcardMonth, 'creditcardYear': creditcardYear};
+            } else {
+                var siteUsername = this.refs.noteform.refs.noteNote.value;
+                var senddata = {'name': name,'category': category, 'noteNote': noteNote};
+            } 
+        }
+        $.ajax({
+            url: "/password/add",
+            type: "POST",
+            data: JSON.stringify({ senddata: senddata }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data){alert(data);},
+            failure: function(errMsg) {
+                alert(errMsg);
+            }
+        });
+    },
     render: function () {
         var categories = this.state.data.map(function (category) {
             return (
@@ -159,23 +192,23 @@ var CategoryContent = React.createClass({
         });
         var content;
         if (this.state.contentState == 1) {
-            content = <LoginForm/>;
+            content = <LoginForm ref="loginform"/>;
         } else {
             if (this.state.contentState == 2) {
-                content = <CreditCardForm/>;
+                content = <CreditCardForm ref="creditcardform"/>;
             } else {
-                content = <NoteForm/>;
+                content = <NoteForm ref="noteform"/>;
             } 
         }
         return (
-            <form method="POST" action="/password/add">
+            <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="nameInput">Name</label>
-                    <input type="text" className="form-control" id="nameInput" ref="name" name="name" placeholder="Name" />
+                    <input type="text" className="form-control" id="nameInput" ref="name" name="name" placeholder="Name" required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleInputPassword1">Category</label>
-                    <select className="form-control" onChange={this.handleChange} name="categoy" ref="category">
+                    <select className="form-control" onChange={this.handleChange} name="categoy" ref="category" required>
                         {categories}
                     </select>
                 </div>
