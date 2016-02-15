@@ -5,6 +5,12 @@ unique_password_dashboard:
 unique_password_add:
     path:     /password/add
     defaults: { _controller: UniquePasswordBundle:Password:add }
+    methods: [GET]
+
+unique_password_add_new:
+    path:     /password/add
+    defaults: { _controller: UniquePasswordBundle:Password:addNew }
+    methods: [POST]
 
 unique_password_list:
     path:     /password
