@@ -7,10 +7,16 @@ interface MyCryptInterface
 
     /**
      * This method will instanciate the class
-     *
+     */
+    public function __construct();
+
+    /**
+     * This method is responsible for setting the password to encode or decode
+     * the content
+     * 
      * @param string $password password to encrypt the content
      */
-    public function __construct($password);
+    public function setPassword($password);
 
     /**
      * This method is responsible for encoding a given string into AES-256 bit

@@ -19,10 +19,19 @@ class MyCrypt implements MyCryptInterface
 
     /**
      * This method will instanciate the class
-     *
+     * 
+     */
+    public function __construct()
+    {
+        
+    }
+    
+    /**
+     * This method is responsible for setting the password for the encryption
+     * 
      * @param string $password password to encrypt the content
      */
-    public function __construct($password)
+    public function setPassword($password)
     {
         $this->key = password_hash($password, PASSWORD_DEFAULT);
     }
