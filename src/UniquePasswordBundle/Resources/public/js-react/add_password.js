@@ -94,7 +94,7 @@ var CreditCardForm = React.createClass ({
                 <div className="form-group">
                     <label htmlFor="dateInput">End Date</label>
                     <div className="containerDate">
-                    <Months/><Years/>
+                    <Months ref="containerMonths"/><Years ref="containerYears"/>
                     </div>
                 </div>
             </div>
@@ -110,7 +110,7 @@ var NoteForm = React.createClass ({
         return (
             <div>
                 <div className="form-group">
-                    <label htmlFor="noteNote">Note</label>
+                    <label htmlFor="noteInput">Note</label>
                     <textarea rows="8" cols="50" className="form-control note" id="noteInput" ref="noteNote" name="noteNote" placeholder="Note" required></textarea>
                 </div>
             </div>
@@ -161,14 +161,14 @@ var CategoryContent = React.createClass({
             var siteSitename = this.refs.loginform.refs.siteSitename.value;
             var senddata = {'name': name,'category': category, 'siteUsername': siteUsername, 'sitePasword': sitePasword, 'siteSitename': siteSitename};
         } else {
-            if (category == 2) {                
+            if (category == 2) {
                 var creditcardName = this.refs.creditcardform.refs.creditcardName.value;
                 var creditcardNumber = this.refs.creditcardform.refs.creditcardNumber.value;
-                var creditcardMonth = this.refs.creditcardform.refs.creditcardMonth.value;
-                var creditcardYear = this.refs.creditcardform.refs.creditcardYear.value;
+                var creditcardMonth = this.refs.creditcardform.refs.containerMonths.refs.creditcardMonth.value;
+                var creditcardYear = this.refs.creditcardform.refs.containerYears.refs.creditcardYear.value;
                 var senddata = {'name': name,'category': category, 'creditcardName': creditcardName, 'creditcardNumber': creditcardNumber, 'creditcardMonth': creditcardMonth, 'creditcardYear': creditcardYear};
             } else {
-                var siteUsername = this.refs.noteform.refs.noteNote.value;
+                var noteNote = this.refs.noteform.refs.noteNote.value;
                 var senddata = {'name': name,'category': category, 'noteNote': noteNote};
             } 
         }
