@@ -3,18 +3,25 @@
 namespace UniquePasswordBundle\Tests\Helper;
 
 use UniquePasswordBundle\Helper\MyCrypt;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+
 /**
  * Description of MyCryptTest
  *
  * @author Pedro Resende <pedroresende@mail.resende.biz>
  */
-class MyCryptTest extends \PHPUnit_Framework_TestCase
+class MyCryptTest extends KernelTestCase
 {
+    private $container;
     private $myCrypt;
 
     protected function setUp()
     {
-        $this->myCrypt = new MyCrypt('This is my L33t Password');
+        self::bootKernel();
+
+        $this->container = self::$kernel->getContainer();
+        $this->myCrypt = $this->container->get('unique_password.mycrypt');
+        $this->myCrypt->setPassword('This is my L33t Password');
     }
 
     public function testEncryptDecrypt()
