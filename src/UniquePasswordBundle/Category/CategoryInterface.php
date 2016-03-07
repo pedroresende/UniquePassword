@@ -9,7 +9,7 @@ namespace UniquePasswordBundle\Category;
 interface CategoryInterface
 {
 
-    public function encode();
+    public function encode($container, $password);
 
-    public function decode();
+    public function decode($container, $password);
 }
