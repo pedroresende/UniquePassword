@@ -13,8 +13,13 @@ class Login implements CategoryInterface
     private $user;
     private $password;
     private $site;
-
-    public function __construct($user, $password, $site)
+    
+    public function __construct()
+    {
+        
+    }
+ 
+    public function setBase($user, $password, $site)
     {
         $this->user = $user;
         $this->password = $password;
@@ -51,14 +56,24 @@ class Login implements CategoryInterface
         $this->site = $site;
     }
 
-    public function decode()
+    public function decode($contentEncoded, $container, $password)
     {
-        return json_decode($this);
+        $myCrypt = $container->get('unique_password.mycrypt');
+        $myCrypt->setPassword($password);
+        $decodedText = $myCrypt->descrypt($contentEncoded);
+
+        return $decodedText;
     }
 
-    public function encode()
+    public function encode($container, $password)
     {
-        return json_encode($this);
+        $object = ['user' => $this->user, 'password' => $this->password, 'site' => $this->site];
+
+        $myCrypt = $container->get('unique_password.mycrypt');
+        $myCrypt->setPassword($password);
+        $encodedText = $myCrypt->encrypt(json_encode($object));
+
+        return $encodedText;
     }
 
 }

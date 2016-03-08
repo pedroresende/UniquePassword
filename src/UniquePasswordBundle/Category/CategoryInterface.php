@@ -11,5 +11,5 @@ interface CategoryInterface
 
     public function encode($container, $password);
 
-    public function decode($container, $password);
+    public function decode($contentEncoded, $container, $password);
 }
