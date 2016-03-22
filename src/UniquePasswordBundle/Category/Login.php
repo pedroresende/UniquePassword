@@ -13,11 +13,6 @@ class Login implements CategoryInterface
     private $user;
     private $password;
     private $site;
-    
-    public function __construct()
-    {
-        
-    }
  
     public function setBase($user, $password, $site)
     {
@@ -60,7 +55,8 @@ class Login implements CategoryInterface
     {
         $myCrypt = $container->get('unique_password.mycrypt');
         $myCrypt->setPassword($password);
-        $decodedText = $myCrypt->descrypt($contentEncoded);
+
+        $decodedText = json_decode($myCrypt->descrypt($contentEncoded), true);
 
         return $decodedText;
     }
