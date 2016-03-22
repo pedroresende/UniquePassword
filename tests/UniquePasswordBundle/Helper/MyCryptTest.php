@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 class MyCryptTest extends KernelTestCase
 {
+
     private $container;
     private $myCrypt;
 
@@ -27,9 +28,27 @@ class MyCryptTest extends KernelTestCase
     public function testEncryptDecrypt()
     {
         $textToEncode = 'This is a text';
-        $encodedText  = $this->myCrypt->encrypt($textToEncode);
-        $decodedText  = $this->myCrypt->descrypt($encodedText);
+
+        $this->myCrypt->setPassword('This is my L33t Password');
+        $encodedText = $this->myCrypt->encrypt($textToEncode);
+
+        $this->myCrypt->setPassword('This is my L33t Password');
+        $decodedText = $this->myCrypt->descrypt($encodedText);
 
         $this->assertEquals($textToEncode, $decodedText);
     }
+
+    public function testEncryptDecryptArray()
+    {
+        $object = ['user' => 'Pedro', 'password' => 'Something', 'site' => 'http'];
+
+        $this->myCrypt->setPassword('This is my L33t Password');
+        $encodedText = $this->myCrypt->encrypt(json_encode($object));
+
+        $this->myCrypt->setPassword('This is my L33t Password');
+        $decodedText = json_decode($this->myCrypt->descrypt($encodedText), true);
+
+        $this->assertEquals($object, $decodedText);
+    }
+
 }
