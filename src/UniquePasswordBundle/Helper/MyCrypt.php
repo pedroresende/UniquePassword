@@ -11,6 +11,7 @@ use UniquePasswordBundle\Helper\MyCryptInterface;
  */
 class MyCrypt implements MyCryptInterface
 {
+
     /**
      *
      * @var string contains the password_hard in bcrypt
@@ -25,7 +26,7 @@ class MyCrypt implements MyCryptInterface
     {
         
     }
-    
+
     /**
      * This method is responsible for setting the password for the encryption
      * 
@@ -33,7 +34,7 @@ class MyCrypt implements MyCryptInterface
      */
     public function setPassword($password)
     {
-        $this->key = password_hash($password, PASSWORD_DEFAULT);
+        $this->key = hash('sha512', $password, TRUE);
     }
 
     /**
@@ -44,8 +45,7 @@ class MyCrypt implements MyCryptInterface
      */
     public function encrypt($toEncode)
     {
-        return mcrypt_encrypt(MCRYPT_RIJNDAEL_256, substr($this->key, 28),
-            $toEncode, MCRYPT_MODE_ECB, $this->iv());
+        return base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, substr($this->key, 32), $toEncode, MCRYPT_MODE_ECB, $this->iv()));
     }
 
     /**
@@ -56,9 +56,9 @@ class MyCrypt implements MyCryptInterface
      */
     public function descrypt($encoded)
     {
-        $decoded = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, substr($this->key, 28),
-            $encoded, MCRYPT_MODE_ECB, $this->iv());
-        return rtrim($decoded, "\0");
+        $decoded = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, substr($this->key, 32), base64_decode($encoded), MCRYPT_MODE_ECB, $this->iv());
+
+        return trim($decoded);
     }
 
     /**
@@ -68,6 +68,8 @@ class MyCrypt implements MyCryptInterface
     private function iv()
     {
         $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
+
         return mcrypt_create_iv($iv_size, MCRYPT_RAND);
     }
+
 }
