@@ -1,0 +1,118 @@
+<?php
+
+namespace UniquePasswordBundle\Helper;
+
+use UniquePasswordBundle\Entity\Content;
+use UniquePasswordBundle\Category\Login;
+use Symfony\Component\HttpFoundation\Response;
+
+/**
+ * Description of CreateContent
+ *
+ * @author Pedro Resende <pedroresende@mail.resende.biz>
+ */
+class CreateContent
+{
+
+    private $container;
+    private $em;
+
+    public function __construct($container, $doctrine, $logger)
+    {
+        $this->container = $container;
+        $this->em = $doctrine;
+    }
+
+    /**
+     * This method is responsible managing a newEntry
+     * 
+     * @param stdObject $entryContent contains the content that has been passed
+     * by the form
+     * @param Symfony\Bundle\FrameworkBundle\Controller $user
+     * @return type
+     */
+    public function newEntry($entryContent, $user)
+    {
+        switch ($entryContent->category) {
+            case 1: {
+                    $this->createLogin($entryContent, $user);
+
+                    return ['httpStatus' => Response::HTTP_CREATED, 'message' => 'New Login information added'];
+                    //break;
+                }
+            case 2: {
+                    $this->createCreditCard($entryContent, $user);
+
+                    return Response::HTTP_CREATED;
+                    //break;
+                }
+            case 3: {
+                    $this->createNote($entryContent, $user);
+
+                    return Response::HTTP_CREATED;
+                    //break;
+                }
+            default: {
+                    return Response::HTTP_BAD_REQUEST;
+                    //break; 
+                }
+        }
+    }
+
+    /**
+     * This method is responsible for creating a new Login Class Category
+     * 
+     * @param stdObject $entryContent contains the content that has been passed
+     * by the form
+     * @param Symfony\Bundle\FrameworkBundle\Controller $user
+     */
+    private function createLogin($entryContent, $user)
+    {
+        $loginContent = new Login();
+        $loginContent->setBase($entryContent->siteUsername, $entryContent->sitePasword, $entryContent->siteSitename);
+
+        $this->createContent($entryContent, $loginContent, $user);
+    }
+
+    /**
+     * This method is responsible for create a new Content and inserting it
+     * into the database
+     * 
+     * @param stdObject $entryContent contains the content that has been passed
+     * by the form
+     * @param UniquePasswordBundle\Category\{Login|CreditCard|Note} $type object to 
+     * be constructed
+     * @param Symfony\Bundle\FrameworkBundle\Controller $user
+     */
+    private function createContent($entryContent, $type, $user)
+    {
+        $dateNow = new \DateTime();
+
+        $content = new Content();
+
+        $content->setName($entryContent->name);
+        $encodedContent = $type->encode($this->container, $user->getPassword());
+
+        $content->setContent($encodedContent);
+
+        $content->setCategory($this->getCategoryById($entryContent->category));
+
+        $content->setCreated($dateNow);
+        $content->setModified($dateNow);
+
+        $this->em->persist($content);
+        $this->em->flush();
+    }
+
+    /**
+     * This method is responsible for fetching a specific category by it's Id
+     * 
+     * @param int $id The Id of the category
+     * @return UniquePasswordBundle\Entity\Content\Category
+     */
+    private function getCategoryById($id)
+    {
+        return $this->em->getRepository('UniquePasswordBundle:Category')->find($id);
+    }
+
+}
