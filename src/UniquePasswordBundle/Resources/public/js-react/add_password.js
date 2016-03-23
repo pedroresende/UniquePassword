@@ -178,9 +178,13 @@ var CategoryContent = React.createClass({
             data: JSON.stringify({ senddata: senddata }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function(data){alert(data);},
+            complete: function(xhr, textStatus) {
+                $( "#message" ).text( xhr.responseText );
+                $('.modal-success').modal('show');
+            },
             failure: function(errMsg) {
-                alert(errMsg);
+                $( "#message" ).text( errMsg );
+                $('.modal-danger').modal('show');
             }
         });
     },
@@ -202,6 +206,40 @@ var CategoryContent = React.createClass({
         }
         return (
             <form onSubmit={this.handleSubmit}>
+                <div className="modal modal-success">
+                  <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h4 className="modal-title">Successfully Added</h4>
+                        </div>
+                        <div className="modal-body">
+                            <p id="message"></p>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="modal modal-danger">
+                  <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h4 className="modal-title">Successfully Added</h4>
+                        </div>
+                        <div className="modal-body">
+                            <p id="message"></p>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
                 <div className="form-group">
                     <label htmlFor="nameInput">Name</label>
                     <input type="text" className="form-control" id="nameInput" ref="name" name="name" placeholder="Name" required/>
