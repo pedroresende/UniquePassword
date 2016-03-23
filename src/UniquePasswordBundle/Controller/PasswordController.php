@@ -28,34 +28,13 @@ class PasswordController extends Controller
     public function addNewAction(Request $request)
     {
         $sentContent = json_decode($request->getContent())->senddata;
-        $em = $this->getDoctrine()->getManager();
 
-        switch ($sentContent->category) {
-            case 1: {
-                    $loginContent = new Login();
-                    $loginContent->setBase($sentContent->siteUsername, $sentContent->sitePasword, $sentContent->siteSitename);
-
-                    $content = new Content();
-
-                    $content->setName($sentContent->name);
-                    $encodedContent = $loginContent->encode($this->container, $this->getUser()->getPassword());
-
-                    $content->setContent($encodedContent);
-                    $categories = $this->getDoctrine()->getRepository('UniquePasswordBundle:Category')->find(1);
-
-                    $content->setCategory($categories);
-                    $dateNow = new \DateTime();
-                    $content->setCreated($dateNow);
-                    $content->setModified($dateNow);
-
-                    $em->persist($content);
-                    var_dump($content);
-                    $em->flush();
-                    break;
-                }
-        }
+        $createContent = $this->get('unique_password.createcontent');
+        $responseArray = $createContent->newEntry($sentContent, $this->getUser());
 
         $response = new Response();
+        $response->setStatusCode($responseArray['httpStatus']);
+        $response->setContent($responseArray['message']);
         return $response;
     }
 
@@ -63,9 +42,8 @@ class PasswordController extends Controller
     {
         $categories = $this->getDoctrine()->getRepository('UniquePasswordBundle:Content')->findAll();
         $encodedContent = $categories[0]->getContent();
-        
         $loginContent = new Login();
-        
+
         $content = $loginContent->decode($encodedContent, $this->container, $this->getUser()->getPassword());
         return $this->render('UniquePasswordBundle:Password:retrieve.html.twig', ['content' => $content]);
     }
