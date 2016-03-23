@@ -38,7 +38,7 @@ class Version20160210110548 extends AbstractMigration implements ContainerAwareI
             $newCategory->setIcon($category['icon']);
 
             $this->em->persist($newCategory);
-            $this->em->flush();
+            $this->em->flush($newCategory);
         }
     }
 
@@ -49,7 +49,7 @@ class Version20160210110548 extends AbstractMigration implements ContainerAwareI
         $categories = $this->container->get('doctrine')->getRepository('UniquePasswordBundle:Category')->findAll();
         foreach ($categories as $category) {
             $this->em->remove($category);
-            $this->em->flush();
+            $this->em->flush($category);
         }
     }
 
