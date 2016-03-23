@@ -16,11 +16,13 @@ class CreateContent
 
     private $container;
     private $em;
+    private $logger;
 
     public function __construct($container, $doctrine, $logger)
     {
         $this->container = $container;
         $this->em = $doctrine;
+        $this->logger = $logger;
     }
 
     /**
@@ -36,19 +38,19 @@ class CreateContent
         switch ($entryContent->category) {
             case 1: {
                     $this->createLogin($entryContent, $user);
-
+                    $this->logger->info('Added new Login entry to the database');
                     return ['httpStatus' => Response::HTTP_CREATED, 'message' => 'New Login information added'];
                     //break;
                 }
             case 2: {
                     $this->createCreditCard($entryContent, $user);
-
+                    $this->logger->info('Added new Credit Card entry to the database');
                     return Response::HTTP_CREATED;
                     //break;
                 }
             case 3: {
                     $this->createNote($entryContent, $user);
-
+                    $this->logger->info('Added new Note entry to the database');
                     return Response::HTTP_CREATED;
                     //break;
                 }
