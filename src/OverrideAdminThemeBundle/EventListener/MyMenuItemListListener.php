@@ -48,10 +48,10 @@ class MyMenuItemListListener
         foreach ($items as $item) { /** @var $item MenuItemModel */
             if ($item->hasChildren()) {
                 $this->activateByRoute($route, $item->getChildren());
-            } else {
-                if ($item->getRoute() == $route) {
-                    $item->setIsActive(true);
-                }
+                continue;
+            }
+            if ($item->getRoute() == $route) {
+                $item->setIsActive(true);
             }
         }
 
