@@ -1,0 +1,8 @@
+before_script:
+  - bash ci/composer-install.sh
+
+uniquepassword:
+  script:
+  - phpcs src/
+  - phpmd src/ text cleancode
+  - bin/phpunit
