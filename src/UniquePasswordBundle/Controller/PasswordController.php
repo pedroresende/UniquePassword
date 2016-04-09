@@ -19,10 +19,7 @@ class PasswordController extends Controller
 
     public function addAction()
     {
-        $content = new Content();
-        $form = $this->createForm(ContentType::class, $content);
-
-        return $this->render('UniquePasswordBundle:Password:add.html.twig', ['form' => $form->createView()]);
+        return $this->render('UniquePasswordBundle:Password:add.html.twig');
     }
 
     public function addNewAction(Request $request)
@@ -40,12 +37,23 @@ class PasswordController extends Controller
 
     public function listAction()
     {
-        $categories = $this->getDoctrine()->getRepository('UniquePasswordBundle:Content')->findAll();
-        $encodedContent = $categories[0]->getContent();
-        $loginContent = new Login();
-
-        $content = $loginContent->decode($encodedContent, $this->container, $this->getUser()->getPassword());
-        return $this->render('UniquePasswordBundle:Password:retrieve.html.twig', ['content' => $content]);
+        return $this->render('UniquePasswordBundle:Password:retrieve.html.twig');
     }
 
+    public function getListAction()
+    {
+        $contents = $this->getDoctrine()->getRepository('UniquePasswordBundle:Content')->findAll();
+
+        $listOfContents = array();
+        foreach ($contents as $content) {
+            $loginContent = new Login();
+            $listOfContents[] = ['id' => $content->getId(), 'name' => $content->getName(), 'category' => $content->getCategory()->getName(), 'created' => $content->getCreated()->format('d/m/Y H:i:s'), 'modified' => $content->getModified()->format('d/m/Y H:i:s'), 'content' => $loginContent->decode($content->getContent(), $this->container, $this->getUser()->getPassword())];
+        }
+
+        $response = new Response();
+        $response->setContent(json_encode($listOfContents));
+        $response->setStatusCode(Response::HTTP_OK);
+
+        return $response;
+    }
 }

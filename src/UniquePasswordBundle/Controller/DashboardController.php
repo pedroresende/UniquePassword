@@ -16,5 +16,4 @@ class DashboardController extends Controller
     {
         return $this->render('UniquePasswordBundle:Dashboard:index.html.twig');
     }
-
 }

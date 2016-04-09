@@ -4,6 +4,10 @@
 
 {% block page_title %}Passwords{% endblock %}
 
-{% block page_content %}  
-    {{ dump(content) }}
+{% block page_content %}
+    <div id="retrieve_password"></div>
+{% endblock %}
+
+{% block javascripts_inline %}
+    <script type="text/babel" src="{{ asset('js/retrieve.js') }}"></script>
 {% endblock %}

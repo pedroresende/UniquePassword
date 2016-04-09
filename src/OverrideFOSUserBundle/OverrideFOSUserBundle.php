@@ -11,5 +11,4 @@ class OverrideFOSUserBundle extends Bundle
     {
         return 'FOSUserBundle';
     }
-
 }

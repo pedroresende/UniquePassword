@@ -26,5 +26,4 @@ class MyShowUserListener
         $userModel = new UserModel();
         return $userModel;
     }
-
 }

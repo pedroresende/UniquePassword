@@ -27,7 +27,7 @@ class CreateContent
 
     /**
      * This method is responsible managing a newEntry
-     * 
+     *
      * @param stdObject $entryContent contains the content that has been passed
      * by the form
      * @param Symfony\Bundle\FrameworkBundle\Controller $user
@@ -36,19 +36,19 @@ class CreateContent
     public function newEntry($entryContent, $user)
     {
         switch ($entryContent->category) {
-            case 1: {
+            case '1': {
                     $this->createLogin($entryContent, $user);
                     $this->logger->info('Added new Login entry to the database');
                     return ['httpStatus' => Response::HTTP_CREATED, 'message' => 'New Login information added'];
                     //break;
                 }
-            case 2: {
+            case '2': {
                     $this->createCreditCard($entryContent, $user);
                     $this->logger->info('Added new Credit Card entry to the database');
                     return Response::HTTP_CREATED;
                     //break;
                 }
-            case 3: {
+            case '3': {
                     $this->createNote($entryContent, $user);
                     $this->logger->info('Added new Note entry to the database');
                     return Response::HTTP_CREATED;
@@ -63,7 +63,7 @@ class CreateContent
 
     /**
      * This method is responsible for creating a new Login Class Category
-     * 
+     *
      * @param stdObject $entryContent contains the content that has been passed
      * by the form
      * @param Symfony\Bundle\FrameworkBundle\Controller $user
@@ -79,10 +79,10 @@ class CreateContent
     /**
      * This method is responsible for create a new Content and inserting it
      * into the database
-     * 
+     *
      * @param stdObject $entryContent contains the content that has been passed
      * by the form
-     * @param UniquePasswordBundle\Category\{Login|CreditCard|Note} $type object to 
+     * @param UniquePasswordBundle\Category\{Login|CreditCard|Note} $type object to
      * be constructed
      * @param Symfony\Bundle\FrameworkBundle\Controller $user
      */
@@ -108,7 +108,7 @@ class CreateContent
 
     /**
      * This method is responsible for fetching a specific category by it's Id
-     * 
+     *
      * @param int $id The Id of the category
      * @return UniquePasswordBundle\Entity\Content\Category
      */
@@ -116,5 +116,4 @@ class CreateContent
     {
         return $this->em->getRepository('UniquePasswordBundle:Category')->find($id);
     }
-
 }

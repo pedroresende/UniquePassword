@@ -5,5 +5,58 @@
 {% block page_title %}Dashboard{% endblock %}
 
 {% block page_content %}
-    
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <a href="{{ path('unique_password_add') }}" style="color: #fff;"><h3>Add New</h3
+
+                        <p>Key</p>
+                    </a>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-plus"></i>
+                </div>
+                <a href="{{ path('unique_password_add') }}" class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-xs-12">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>150</h3>
+
+                    <p>Keys Stored</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-key"></i>
+                </div>
+                <a href="{{ path('unique_password_list') }}" class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-6 col-xs-12">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                    <p>Categories</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-folder-open-o"></i>
+                </div>
+                <a href="{{ path('unique_categories_list') }}" class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

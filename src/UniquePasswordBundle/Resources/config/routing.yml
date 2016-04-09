@@ -16,6 +16,10 @@ unique_password_list:
     path:     /password
     defaults: { _controller: UniquePasswordBundle:Password:list }
 
+unique_password_getlist:
+    path:     /password/get
+    defaults: { _controller: UniquePasswordBundle:Password:getList }
+
 unique_categories_list:
     path:     /categories
     defaults: { _controller: UniquePasswordBundle:Category:list }

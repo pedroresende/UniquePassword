@@ -11,5 +11,4 @@ class OverrideAdminThemeBundle extends Bundle
     {
         return 'AvanzuAdminThemeBundle';
     }
-
 }

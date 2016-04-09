@@ -256,7 +256,7 @@ var CategoryContent = React.createClass({
         );
     }
 });
-      
+
 ReactDOM.render(
   <CategoryContent url="/categories/get"/>,
   document.getElementById('add_password')
