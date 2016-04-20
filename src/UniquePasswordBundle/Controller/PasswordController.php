@@ -16,12 +16,6 @@ use UniquePasswordBundle\Category\Login;
  */
 class PasswordController extends Controller
 {
-
-    public function addAction()
-    {
-        return $this->render('UniquePasswordBundle:Password:add.html.twig');
-    }
-
     public function addNewAction(Request $request)
     {
         $sentContent = json_decode($request->getContent())->senddata;
@@ -33,11 +27,6 @@ class PasswordController extends Controller
         $response->setStatusCode($responseArray['httpStatus']);
         $response->setContent($responseArray['message']);
         return $response;
-    }
-
-    public function listAction()
-    {
-        return $this->render('UniquePasswordBundle:Password:retrieve.html.twig');
     }
 
     public function getListAction()
@@ -75,6 +64,6 @@ class PasswordController extends Controller
         $response->setContent(json_encode($decodedContent));
         $response->setStatusCode(Response::HTTP_OK);
 
-        return $response;   
+        return $response;
     }
 }
