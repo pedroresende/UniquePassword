@@ -29,7 +29,8 @@ class Version20160210110548 extends AbstractMigration implements ContainerAwareI
         $arryOfCategories = array(
             array('name' => 'Login', 'icon' => 'fa-sign-in'),
             array('name' => 'Credit Card', 'icon' => 'fa-credit-card'),
-            array('name' => 'Note', 'icon' => 'fa-sticky-note-o')
+            array('name' => 'Note', 'icon' => 'fa-sticky-note-o'),
+            array('name' => 'ssh', 'icon' => 'fa-terminal')
         );
         foreach ($arryOfCategories as $category) {
             $newCategory = new Category;
