@@ -14,6 +14,15 @@ class DashboardController extends Controller
 
     public function indexAction()
     {
-        return $this->render('UniquePasswordBundle:Dashboard:index.html.twig');
+        $numberOfCategories = $this->getDoctrine()->getRepository('UniquePasswordBundle:Category')->findAll();
+        $numberOfKeys = $this->getDoctrine()->getRepository('UniquePasswordBundle:Content')->findAll();
+
+        return $this->render(
+            'UniquePasswordBundle:Dashboard:index.html.twig',
+            [
+                'numberOfKeys' => count($numberOfKeys),
+                'numberOfCategories' => count($numberOfCategories)
+            ]
+        );
     }
 }
