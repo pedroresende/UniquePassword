@@ -3,16 +3,20 @@ var LoginForm = React.createClass({
         return (
             <div>
                 <div className="form-group">
+                    <label htmlFor="usernameInput">Name</label>
+                    <input type="text" className="form-control" id="nameInput" name="nameInput" ref="nameInput" value={this.props.data.name} required/>
+                </div>
+                <div className="form-group">
                     <label htmlFor="usernameInput">Username</label>
-                    <input type="text" className="form-control" id="usernameInput" name="siteUsername" ref="siteUsername" placeholder={this.props.data.user} required/>
+                    <input type="text" className="form-control" id="usernameInput" name="siteUsername" ref="siteUsername" value={this.props.data.user} required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="passwordInput">Password</label>
-                    <input type="password" className="form-control" id="passwordInput" name="sitePassword" ref="sitePassword" placeholder={this.props.data.password} required/>
+                    <input type="password" className="form-control" id="passwordInput" name="sitePassword" ref="sitePassword" value={this.props.data.password} required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="sitenameInput">Site Name</label>
-                    <input type="text" className="form-control" id="sitenameInput" name="siteSitename" ref="siteSitename" placeholder={this.props.data.site} required/>
+                    <input type="text" className="form-control" id="sitenameInput" name="siteSitename" ref="siteSitename" value={this.props.data.site} required/>
                 </div>
             </div>
         );
@@ -41,7 +45,7 @@ var PasswordContent = React.createClass({
         });
     },
     render: function () {
-        content = 'Loading...';
+        var content = 'Loading...';
         if (this.state.data.categoryId == 1) {
                 content = <LoginForm ref="loginform" data={this.state.data} />
         } else {
