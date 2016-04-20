@@ -28,19 +28,19 @@ class RetrieveContent
     {
         switch ($contentEncoded->getCategory()->getId()) {
             case '1': {
-                    return $this->getLogin($contentEncoded->getContent(), $user, $contentEncoded->getCategory()->getId());
+                    return $this->getLogin($contentEncoded, $user, $contentEncoded->getCategory()->getId());
                     //$this->logger->info('Added new Login entry to the database');
                     //return ['httpStatus' => Response::HTTP_CREATED, 'message' => 'New Login information added'];
                     //break;
                 }
             case '2': {
-                    $this->getCreditCard($contentEncoded->getContent(), $user, $contentEncoded->getCategory()->getId());
+                    $this->getCreditCard($contentEncoded, $user, $contentEncoded->getCategory()->getId());
                     $this->logger->info('Added new Credit Card entry to the database');
                     return Response::HTTP_CREATED;
                     //break;
                 }
             case '3': {
-                    $this->getNote($contentEncoded->getContent(), $user, $contentEncoded->getCategory()->getId());
+                    $this->getNote($contentEncoded, $user, $contentEncoded->getCategory()->getId());
                     $this->logger->info('Added new Note entry to the database');
                     return Response::HTTP_CREATED;
                     //break;
@@ -55,8 +55,9 @@ class RetrieveContent
     private function getLogin($contentEncoded, $user, $categoryId)
     {
         $login = new Login();
-        $content = $login->decode($contentEncoded, $this->container, $user->getPassword());
+        $content = $login->decode($contentEncoded->getContent(), $this->container, $user->getPassword());
         $content['categoryId'] = $categoryId;
+        $content['name'] = $contentEncoded->getName();
 
         return $content;
     }
