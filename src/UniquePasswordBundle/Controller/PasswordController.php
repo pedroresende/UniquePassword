@@ -56,4 +56,25 @@ class PasswordController extends Controller
 
         return $response;
     }
+
+    public function viewAction()
+    {
+        return $this->render('UniquePasswordBundle:Password:view.html.twig');
+    }
+
+    public function getContentAction($id)
+    {
+        $content = $this->getDoctrine()->getRepository('UniquePasswordBundle:Content')->find($id);
+
+        if (isset($content)) {
+            $retrievecontent = $this->get('unique_password.retrievecontent');
+            $decodedContent = $retrievecontent->getEntry($content, $this->getUser());
+        }
+
+        $response = new Response();
+        $response->setContent(json_encode($decodedContent));
+        $response->setStatusCode(Response::HTTP_OK);
+
+        return $response;   
+    }
 }
