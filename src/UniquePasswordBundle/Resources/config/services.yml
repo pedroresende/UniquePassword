@@ -6,3 +6,7 @@ services:
         class: UniquePasswordBundle\Helper\CreateContent
         arguments: ['@service_container', '@doctrine.orm.entity_manager', '@logger']
 
+    unique_password.retrievecontent:
+        class: UniquePasswordBundle\Helper\RetrieveContent
+        arguments: ['@service_container', '@doctrine.orm.entity_manager', '@logger']
+

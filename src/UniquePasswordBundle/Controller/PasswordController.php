@@ -16,15 +16,6 @@ use UniquePasswordBundle\Category\Login;
  */
 class PasswordController extends Controller
 {
-
-    public function addAction()
-    {
-        $content = new Content();
-        $form = $this->createForm(ContentType::class, $content);
-
-        return $this->render('UniquePasswordBundle:Password:add.html.twig', ['form' => $form->createView()]);
-    }
-
     public function addNewAction(Request $request)
     {
         $sentContent = json_decode($request->getContent())->senddata;
@@ -38,14 +29,41 @@ class PasswordController extends Controller
         return $response;
     }
 
-    public function listAction()
+    public function getListAction()
     {
-        $categories = $this->getDoctrine()->getRepository('UniquePasswordBundle:Content')->findAll();
-        $encodedContent = $categories[0]->getContent();
-        $loginContent = new Login();
+        $contents = $this->getDoctrine()->getRepository('UniquePasswordBundle:Content')->findAll();
 
-        $content = $loginContent->decode($encodedContent, $this->container, $this->getUser()->getPassword());
-        return $this->render('UniquePasswordBundle:Password:retrieve.html.twig', ['content' => $content]);
+        $listOfContents = array();
+        foreach ($contents as $content) {
+            $loginContent = new Login();
+            $listOfContents[] = ['id' => $content->getId(), 'name' => $content->getName(), 'category' => $content->getCategory()->getName(), 'created' => $content->getCreated()->format('d/m/Y H:i:s'), 'modified' => $content->getModified()->format('d/m/Y H:i:s'), 'content' => $loginContent->decode($content->getContent(), $this->container, $this->getUser()->getPassword())];
+        }
+
+        $response = new Response();
+        $response->setContent(json_encode($listOfContents));
+        $response->setStatusCode(Response::HTTP_OK);
+
+        return $response;
     }
 
+    public function viewAction()
+    {
+        return $this->render('UniquePasswordBundle:Password:view.html.twig');
+    }
+
+    public function getContentAction($id)
+    {
+        $content = $this->getDoctrine()->getRepository('UniquePasswordBundle:Content')->find($id);
+
+        if (isset($content)) {
+            $retrievecontent = $this->get('unique_password.retrievecontent');
+            $decodedContent = $retrievecontent->getEntry($content, $this->getUser());
+        }
+
+        $response = new Response();
+        $response->setContent(json_encode($decodedContent));
+        $response->setStatusCode(Response::HTTP_OK);
+
+        return $response;
+    }
 }

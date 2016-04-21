@@ -2,12 +2,13 @@
 
 {% block title %}Unique Password{% endblock %}
 
-{% block page_title %}Passwords{% endblock %}
+{% block page_title %}Retrieve{% endblock %}
 
 {% block page_content %}
+    <input type="hidden" id="content" value="{{ app.request.get('id') }}">
     <div id="retrieve_password"></div>
 {% endblock %}
 
 {% block javascripts_inline %}
-    <script type="text/babel" src="{{ asset('js/retrieve.js') }}"></script>
+    <script type="text/babel" src="{{ asset('js/retrieve_password.js') }}"></script>
 {% endblock %}

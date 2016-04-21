@@ -181,5 +181,4 @@ class Content
     {
         $this->created = $created;
     }
-
 }

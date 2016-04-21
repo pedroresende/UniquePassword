@@ -30,7 +30,7 @@ class Category
 
     /**
      * @var string
-     * 
+     *
      * @ORM\Column(name="icon", type="string", length=255, unique=true)
      */
     private $icon;

@@ -33,11 +33,35 @@ class MyMenuItemListListener
         );
 
         $password
-                ->addChild(new MenuItemModel('add-passwords', 'Add New', 'unique_password_add', $earg, 'fa fa-plus'))
-                ->addChild(new MenuItemModel('list-passwords', 'Retrieve', 'unique_password_list', $earg, 'fa fa-unlock'));
+            ->addChild(
+                new MenuItemModel(
+                    'add-passwords',
+                    'Add New',
+                    'unique_password_add',
+                    $earg,
+                    'fa fa-plus'
+                )
+            )
+            ->addChild(
+                new MenuItemModel(
+                    'list-passwords',
+                    'Retrieve',
+                    'unique_password_list',
+                    $earg,
+                    'fa fa-unlock'
+                )
+            );
 
         $categories
-                ->addChild(new MenuItemModel('list-categories', 'List', 'unique_categories_list', $earg, 'fa fa-folder-open-o'));
+            ->addChild(
+                new MenuItemModel(
+                    'list-categories', 
+                    'List', 
+                    'unique_categories_list', 
+                    $earg, 
+                    'fa fa-folder-open-o'
+                )
+            );
 
         return $this->activateByRoute($request->get('_route'), $rootItems);
     }
@@ -48,14 +72,13 @@ class MyMenuItemListListener
         foreach ($items as $item) { /** @var $item MenuItemModel */
             if ($item->hasChildren()) {
                 $this->activateByRoute($route, $item->getChildren());
-            } else {
-                if ($item->getRoute() == $route) {
-                    $item->setIsActive(true);
-                }
+                continue;
+            }
+            if ($item->getRoute() == $route) {
+                $item->setIsActive(true);
             }
         }
 
         return $items;
     }
-
 }

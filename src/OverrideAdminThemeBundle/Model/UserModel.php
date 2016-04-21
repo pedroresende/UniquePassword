@@ -46,5 +46,4 @@ class UserModel implements ThemeUser
     {
         return true;
     }
-
 }

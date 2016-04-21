@@ -20,7 +20,7 @@ class MyCrypt implements MyCryptInterface
 
     /**
      * This method will instanciate the class
-     * 
+     *
      */
     public function __construct()
     {
@@ -29,12 +29,12 @@ class MyCrypt implements MyCryptInterface
 
     /**
      * This method is responsible for setting the password for the encryption
-     * 
+     *
      * @param string $password password to encrypt the content
      */
     public function setPassword($password)
     {
-        $this->key = hash('sha512', $password, TRUE);
+        $this->key = hash('sha512', $password, true);
     }
 
     /**
@@ -45,7 +45,15 @@ class MyCrypt implements MyCryptInterface
      */
     public function encrypt($toEncode)
     {
-        return base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, substr($this->key, 32), $toEncode, MCRYPT_MODE_ECB, $this->iv()));
+        return base64_encode(
+            mcrypt_encrypt(
+                MCRYPT_RIJNDAEL_256,
+                substr($this->key, 32),
+                $toEncode,
+                MCRYPT_MODE_ECB,
+                $this->iv()
+            )
+        );
     }
 
     /**
@@ -56,7 +64,13 @@ class MyCrypt implements MyCryptInterface
      */
     public function descrypt($encoded)
     {
-        $decoded = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, substr($this->key, 32), base64_decode($encoded), MCRYPT_MODE_ECB, $this->iv());
+        $decoded = mcrypt_decrypt(
+            MCRYPT_RIJNDAEL_256,
+            substr($this->key, 32),
+            base64_decode($encoded),
+            MCRYPT_MODE_ECB,
+            $this->iv()
+        );
 
         return trim($decoded);
     }
@@ -71,5 +85,4 @@ class MyCrypt implements MyCryptInterface
 
         return mcrypt_create_iv($iv_size, MCRYPT_RAND);
     }
-
 }

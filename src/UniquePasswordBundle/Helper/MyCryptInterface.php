@@ -13,7 +13,7 @@ interface MyCryptInterface
     /**
      * This method is responsible for setting the password to encode or decode
      * the content
-     * 
+     *
      * @param string $password password to encrypt the content
      */
     public function setPassword($password);

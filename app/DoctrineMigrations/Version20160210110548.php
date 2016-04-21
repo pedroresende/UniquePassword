@@ -29,7 +29,8 @@ class Version20160210110548 extends AbstractMigration implements ContainerAwareI
         $arryOfCategories = array(
             array('name' => 'Login', 'icon' => 'fa-sign-in'),
             array('name' => 'Credit Card', 'icon' => 'fa-credit-card'),
-            array('name' => 'Note', 'icon' => 'fa-sticky-note-o')
+            array('name' => 'Note', 'icon' => 'fa-sticky-note-o'),
+            array('name' => 'ssh', 'icon' => 'fa-terminal')
         );
         foreach ($arryOfCategories as $category) {
             $newCategory = new Category;
@@ -38,7 +39,7 @@ class Version20160210110548 extends AbstractMigration implements ContainerAwareI
             $newCategory->setIcon($category['icon']);
 
             $this->em->persist($newCategory);
-            $this->em->flush();
+            $this->em->flush($newCategory);
         }
     }
 
@@ -49,7 +50,7 @@ class Version20160210110548 extends AbstractMigration implements ContainerAwareI
         $categories = $this->container->get('doctrine')->getRepository('UniquePasswordBundle:Category')->findAll();
         foreach ($categories as $category) {
             $this->em->remove($category);
-            $this->em->flush();
+            $this->em->flush($category);
         }
     }
 

@@ -4,8 +4,11 @@ unique_password_dashboard:
 
 unique_password_add:
     path:     /password/add
-    defaults: { _controller: UniquePasswordBundle:Password:add }
-    methods: [GET]
+    defaults:
+        _controller:  FrameworkBundle:Template:template
+        template:     'UniquePasswordBundle:Password:add.html.twig'
+        maxAge:       86400
+        sharedAge:    86400
 
 unique_password_add_new:
     path:     /password/add
@@ -14,7 +17,23 @@ unique_password_add_new:
 
 unique_password_list:
     path:     /password
-    defaults: { _controller: UniquePasswordBundle:Password:list }
+    defaults:
+        _controller:  FrameworkBundle:Template:template
+        template:     'UniquePasswordBundle:Password:retrieve.html.twig'
+        maxAge:       86400
+        sharedAge:    86400
+
+unique_password_getlist:
+    path:     /password/get
+    defaults: { _controller: UniquePasswordBundle:Password:getList }
+
+unique_password_view:
+    path:     /password/view/{id}
+    defaults: { _controller: UniquePasswordBundle:Password:view }
+
+unique_password_getcontent:
+    path:     /password/getContent/{id}
+    defaults: { _controller: UniquePasswordBundle:Password:getContent, id: 0 }
 
 unique_categories_list:
     path:     /categories

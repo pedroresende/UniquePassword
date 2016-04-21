@@ -71,5 +71,4 @@ class Login implements CategoryInterface
 
         return $encodedText;
     }
-
 }
