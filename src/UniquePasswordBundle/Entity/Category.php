@@ -93,4 +93,3 @@ class Category
         return $this->icon;
     }
 }
-

@@ -5,46 +5,10 @@
 {% block page_title %}Categories{% endblock %}
 
 {% block page_content %}
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box">
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row">
-                            <div class="col-sm-6"></div>
-                            <div class="col-sm-6"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-                                    <thead>
-                                        <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Icon">Icon</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Category">Category</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="N Type">Number of Type</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for category in categories %}
-                                            {% if loop.index0 is even %}
-                                                <tr role="row" class="odd">
-                                            {% else %}
-                                                <tr role="row" class="odd">
-                                            {% endif %}
-                                                <td class="sorting_1"><i class="fa {{ category.icon }}"></i></td>
-                                                <td>{{ category.name }}</td>
-                                                <td>{{ category.counter }}</td>
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.box-body -->
-            </div>
-        </div>
-    </div>
+    <div id="retrieve_categories"></div>
+{% endblock %}
+
+{% block javascripts_inline %}
+    <script type="text/babel" src="{{ asset('assets/vendor/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <script type="text/babel" src="{{ asset('js/retrieve_categories.js') }}"></script>
 {% endblock %}

@@ -42,8 +42,12 @@ unique_password_getcontent:
 
 unique_categories_list:
     path:     /categories
-    defaults: { _controller: UniquePasswordBundle:Category:list }
-    
+    defaults:
+        _controller:  FrameworkBundle:Template:template
+        template:     'UniquePasswordBundle:Category:categories.html.twig'
+        maxAge:       86400
+        sharedAge:    86400
+
 unique_categories_getlist:
     path:     /categories/get
     defaults: { _controller: UniquePasswordBundle:Category:getList }
