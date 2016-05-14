@@ -15,6 +15,11 @@ unique_password_add_new:
     defaults: { _controller: UniquePasswordBundle:Password:addNew }
     methods: [POST]
 
+unique_password_update_new:
+    path:     /password/update/{id}
+    defaults: { _controller: UniquePasswordBundle:Password:update, id: 0 }
+    methods: [POST]
+
 unique_password_list:
     path:     /password
     defaults:
