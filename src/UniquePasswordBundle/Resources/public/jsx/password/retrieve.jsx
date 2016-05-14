@@ -67,7 +67,6 @@ var PasswordContent = React.createClass({
         });
     },
     render: function () {
-        var results = this.state.data.length;
         return (
             <div className="box">
                 <div className="box-header">
@@ -89,15 +88,6 @@ var PasswordContent = React.createClass({
                                     </thead>
                                     <ListContent data={this.state.data} />
                                 </table>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-sm-5">
-                                <div className="dataTables_info" id="example1_info" role="status" aria-live="polite">
-                                    Showing {results} entries
-                                </div>
-                            </div>
-                            <div className="col-sm-7">
                             </div>
                         </div>
                     </div>

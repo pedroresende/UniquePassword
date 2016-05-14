@@ -110,7 +110,6 @@ var PasswordContent = React.createClass({
     }
 });
 
-
 ReactDOM.render(
   <PasswordContent url='/password/getContent/'/>,
   document.getElementById('retrieve_password')
