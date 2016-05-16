@@ -12,25 +12,14 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CategoryController extends Controller
 {
-
-    public function listAction()
-    {
-        $categories = $this->getDoctrine()->getRepository('UniquePasswordBundle:Category')->findAll();
-        $categoriesCounter = [];
-        foreach ($categories as $category) {
-            $category->counter = $this->getDoctrine()->getRepository('UniquePasswordBundle:Category')->findNumberOfPasswords($category->getName())[0][1];
-        }
-
-        return $this->render('UniquePasswordBundle:Category:categories.html.twig', ['categories' => $categories, 'categoriesCounter' => $categoriesCounter]);
-    }
-
     public function getListAction()
     {
         $categories = $this->getDoctrine()->getRepository('UniquePasswordBundle:Category')->findAll();
 
         $listOfCategories = [];
         foreach ($categories as $category) {
-            $listOfCategories[] = ['id' => $category->getId(), 'name' => $category->getName()];
+            $NumberOfCategory = $this->getDoctrine()->getRepository('UniquePasswordBundle:Category')->findNumberOfPasswords($category->getName())[0][1];
+            $listOfCategories[] = ['id' => $category->getId(), 'icon' => $category->getIcon(), 'name' => $category->getName(), 'categoryCounter' => $NumberOfCategory];
         }
 
         $response = new Response();

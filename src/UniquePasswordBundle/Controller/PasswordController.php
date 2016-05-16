@@ -26,6 +26,7 @@ class PasswordController extends Controller
         $response = new Response();
         $response->setStatusCode($responseArray['httpStatus']);
         $response->setContent($responseArray['message']);
+
         return $response;
     }
 
@@ -63,6 +64,20 @@ class PasswordController extends Controller
         $response = new Response();
         $response->setContent(json_encode($decodedContent));
         $response->setStatusCode(Response::HTTP_OK);
+
+        return $response;
+    }
+
+    public function updateAction(Request $request, $id)
+    {
+        $sentContent = json_decode($request->getContent())->senddata;
+
+        $createContent = $this->get('unique_password.createcontent');
+        $responseArray = $createContent->updateEntry($id, $sentContent, $this->getUser());
+
+        $response = new Response();
+        $response->setStatusCode($responseArray['httpStatus']);
+        $response->setContent($responseArray['message']);
 
         return $response;
     }

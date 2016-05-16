@@ -8,7 +8,7 @@ var image = require('gulp-image');
 var react = require('gulp-react');
 
 gulp.task('copy-react-js', function() {
-    gulp.src('./src/**/**/Resources/public/js-react/*.js')
+    gulp.src('./src/**/**/Resources/public/jsx/**/*.jsx')
         .pipe(react())
         .pipe(rename({dirname: ''}))
         .pipe(gulp.dest('web/js'));

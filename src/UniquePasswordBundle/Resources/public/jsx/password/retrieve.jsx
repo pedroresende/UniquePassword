@@ -10,15 +10,13 @@ var Content = React.createClass({
             <td>{this.props.content.modified}</td>
             <td>{this.props.content.created}</td>
             <td>
-                <a href={view} className="btn btn-sm btn-primary">View</a>&nbsp;
-                <a href={edit} className="btn btn-sm btn-info">Edit</a>&nbsp;
+                <a href={view} className="btn btn-sm btn-primary">View/Edit</a>&nbsp;
                 <a href={remove} className="btn btn-sm btn-danger">Delete</a>
             </td>
         </tr>
     );
   }
 });
-
 
 var ListContent = React.createClass({
     render: function() {
@@ -44,7 +42,7 @@ var PasswordContent = React.createClass({
             contentState: "1"
         };
     },
-    componentDidMount: function () {
+    componentWillMount: function () {
         $.ajax({
             url: this.props.url,
             dataType: 'json',
@@ -57,38 +55,28 @@ var PasswordContent = React.createClass({
             }.bind(this)
         });
     },
+    componentDidUpdate: function () {
+        $('#list_passwords').DataTable( {
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "sDom": 'lfrtip'
+        });
+    },
     render: function () {
-        var results = this.state.data.length;
         return (
             <div className="box">
                 <div className="box-header">
-                    <h3 className="box-title">Data Table With Full Features</h3>
+                    <h3 className="box-title">List of Passwords</h3>
                 </div>
                 <div className="box-body">
-                    <div id="example1_wrapper" className="dataTables_wrapper form-inline dt-bootstrap">
-                        <div className="row">
-                            <div className="col-sm-6">
-                                <div className="dataTables_length" id="example1_length">
-                                    <label>Show 
-                                        <select name="example1_length" aria-controls="example1" className="form-control input-sm">
-                                            <option value="10">10</option>
-                                            <option value="25">25</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
-                                        </select> entries</label>
-                                </div>
-                            </div>
-                            <div className="col-sm-6">
-                                <div id="example1_filter" className="dataTables_filter">
-                                    <label>Search:
-                                        <input type="search" className="form-control input-sm" placeholder="" aria-controls="example1" />
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                    <div id="results" className="dataTables_wrapper form-inline dt-bootstrap">
                         <div className="row">
                             <div className="col-sm-12">
-                                <table id="example1" className="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                                <table id="list_passwords" className="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                                     <thead>
                                         <tr role="row">
                                             <th className="sorting_asc" tabIndex="0" aria-controls="example1" rowSpan="1" colSpan="1" aria-sort="ascending" aria-label="Category: activate to sort column descending">Category</th>
@@ -100,15 +88,6 @@ var PasswordContent = React.createClass({
                                     </thead>
                                     <ListContent data={this.state.data} />
                                 </table>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-sm-5">
-                                <div className="dataTables_info" id="example1_info" role="status" aria-live="polite">
-                                    Showing {results} entries
-                                </div>
-                            </div>
-                            <div className="col-sm-7">
                             </div>
                         </div>
                     </div>

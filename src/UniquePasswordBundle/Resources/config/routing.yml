@@ -15,6 +15,11 @@ unique_password_add_new:
     defaults: { _controller: UniquePasswordBundle:Password:addNew }
     methods: [POST]
 
+unique_password_update_new:
+    path:     /password/update/{id}
+    defaults: { _controller: UniquePasswordBundle:Password:update, id: 0 }
+    methods: [POST]
+
 unique_password_list:
     path:     /password
     defaults:
@@ -37,8 +42,12 @@ unique_password_getcontent:
 
 unique_categories_list:
     path:     /categories
-    defaults: { _controller: UniquePasswordBundle:Category:list }
-    
+    defaults:
+        _controller:  FrameworkBundle:Template:template
+        template:     'UniquePasswordBundle:Category:categories.html.twig'
+        maxAge:       86400
+        sharedAge:    86400
+
 unique_categories_getlist:
     path:     /categories/get
     defaults: { _controller: UniquePasswordBundle:Category:getList }
